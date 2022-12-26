@@ -79,19 +79,32 @@ extends DrawableHelper {
 
 			// Sprites
 			// Left-right
-			this.drawTexture(stack, i - 21, this.scaledHeight - 55, 61, this.client.options.leftKey.isPressed() ? 38 : 30, 17, 8);
-			this.drawTexture(stack, i + 3, this.scaledHeight - 55, 79, this.client.options.rightKey.isPressed() ? 38 : 30, 17, 8);
+			this.drawTexture(stack, i - 32, this.scaledHeight - 55, 61, this.client.options.leftKey.isPressed() ? 38 : 30, 17, 8);
+			this.drawTexture(stack, i + 18, this.scaledHeight - 55, 79, this.client.options.rightKey.isPressed() ? 38 : 30, 17, 8);
 			// Brake-throttle bar
 			this.drawTexture(stack, i, this.scaledHeight - 45, 0, this.client.options.forwardKey.isPressed() ? 45 : 40, 61, 5);
 			this.drawTexture(stack, i - 61, this.scaledHeight - 45, 0, this.client.options.backKey.isPressed() ? 35 : 30, 61, 5);
+			// Gain Arrow
+			this.drawTexture(stack, i + 80, this.scaledHeight - 55, 203, this.getOvrSpeed(), 7, 9);
 
 			// Speed and drift angle
-			this.typeCentered(stack, String.format(Config.speedFormat, this.displayedSpeed * Config.speedRate), i - 58, this.scaledHeight - 54, 0xFFFFFF);
-			this.typeCentered(stack, String.format(Config.angleFormat, Common.hudData.driftAngle), i + 58, this.scaledHeight - 54, 0xFFFFFF);
+			this.typeCentered(stack, String.format(Config.gFormat, Common.hudData.g), i + 60, this.scaledHeight - 54, 0xFFFFFF);
+			this.typeCentered(stack, String.format(Config.speedFormat, this.displayedSpeed * Config.speedRate), i - 62, this.scaledHeight - 54, 0xFFFFFF);
+			this.typeCentered(stack, String.format(Config.angleFormat, Common.hudData.driftAngle), i + 2, this.scaledHeight - 54, 0xFFFFFF);
 
 
 		}
 		RenderSystem.disableBlend();
+	}
+
+	private Integer getOvrSpeed() {
+		if (Common.hudData.g > 0.0) {
+			return 0;
+		}
+		if (Common.hudData.g < 0.0) {
+			return 9;
+		}
+		return 18;
 	}
 
 	/** Renders the speed bar atop the HUD, uses displayedSpeed to, well, diisplay the speed. */
