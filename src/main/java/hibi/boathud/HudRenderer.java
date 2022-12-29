@@ -84,7 +84,7 @@ extends DrawableHelper {
 			// Brake-throttle bar
 			this.drawTexture(stack, i, this.scaledHeight - 45, 0, this.client.options.forwardKey.isPressed() ? 45 : 40, 61, 5);
 			this.drawTexture(stack, i - 61, this.scaledHeight - 45, 0, this.client.options.backKey.isPressed() ? 35 : 30, 61, 5);
-			// Gain Arrow
+			// Gain Arrow by Pigalala
 			this.drawTexture(stack, i + 80, this.scaledHeight - 55, 203, this.getOvrSpeed(), 7, 9);
 
 			// Speed and drift angle
@@ -96,7 +96,8 @@ extends DrawableHelper {
 		}
 		RenderSystem.disableBlend();
 	}
-
+	
+	// Made by Pigalala
 	private Integer getOvrSpeed() {
 		if (Common.hudData.g > 0.0) {
 			return 0;
