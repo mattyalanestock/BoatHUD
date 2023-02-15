@@ -22,6 +22,8 @@ public class Config {
 	public static boolean enabled = true;
 	/** Controls whether or not to show all the available details on the HUD. */
 	public static boolean extended = true;
+	/** Controls whether or not to vertically center the HUD. */
+	public static boolean centered = true;
 
 	/** Conversion rate between speed unit and m/s. Should not be modified directly, use setUnit(). */
 	public static double speedRate = 3.6d;
@@ -52,6 +54,8 @@ public class Config {
 						enabled = Boolean.parseBoolean(line.substring(8));
 					if(line.startsWith("extended "))
 						extended = Boolean.parseBoolean(line.substring(9));
+					if(line.startsWith("centered "))
+						centered = Boolean.parseBoolean(line.substring(9));
 					if(line.startsWith("barType "))
 						barType = Integer.parseInt(line.substring(8));
 					if(line.startsWith("speedUnit "))
@@ -77,6 +81,7 @@ public class Config {
 			FileWriter writer = new FileWriter(file);
 			writer.write("enabled " + Boolean.toString(enabled) + "\n");
 			writer.write("extended " + Boolean.toString(extended) + "\n");
+			writer.write("centered " + Boolean.toString(centered) + "\n");
 			writer.write("barType " + Integer.toString(barType) + "\n");
 			writer.write("speedUnit " + Integer.toString(configSpeedType) + "\n");
 			writer.close();

@@ -24,6 +24,12 @@ public class MenuInteg implements ModMenuApi {
 					.setSaveConsumer(newVal -> Config.enabled = newVal)
 					.build())
 
+				.addEntry(entryBuilder.startBooleanToggle(CENTERED, Config.centered)
+					.setDefaultValue(false)
+					.setTooltip(TIP_CENTERED)
+					.setSaveConsumer(newVal -> Config.centered = newVal)
+					.build())
+
 				.addEntry(entryBuilder.startBooleanToggle(EXTENDED, Config.extended)
 					.setDefaultValue(true)
 					.setTooltip(TIP_EXTENDED)
@@ -59,10 +65,12 @@ public class MenuInteg implements ModMenuApi {
 		TITLE = Text.translatable("boathud.config.title"),
 		CAT = Text.translatable("boathud.config.cat"),
 		ENABLED = Text.translatable("boathud.option.enabled"),
+		CENTERED = Text.translatable("boathud.option.centered"),
 		EXTENDED = Text.translatable("boathud.option.extended"),
 		BAR_TYPE = Text.translatable("boathud.option.bar_type"),
 		SPEED_FORMAT = Text.translatable("boathud.option.speed_format"),
 		TIP_EXTENDED = Text.translatable("boathud.tooltip.extended"),
+		TIP_CENTERED = Text.translatable("boathud.tooltip.centered"),
 		TIP_BAR = Text.translatable("boathud.tooltip.bar_type"),
 		TIP_BAR_PACKED = Text.translatable("boathud.tooltip.bar_type.packed"),
 		TIP_BAR_MIXED = Text.translatable("boathud.tooltip.bar_type.mixed"),

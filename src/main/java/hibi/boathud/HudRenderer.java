@@ -35,7 +35,11 @@ extends DrawableHelper {
 
 	public void render(MatrixStack stack, float tickDelta) {
 		this.scaledWidth = this.client.getWindow().getScaledWidth();
-		this.scaledHeight = this.client.getWindow().getScaledHeight();
+		if(Config.centered) {
+			this.scaledHeight = (int) ((this.client.getWindow().getScaledHeight()/2) + 96);
+		} else {
+			this.scaledHeight = this.client.getWindow().getScaledHeight();
+		}
 		int i = this.scaledWidth / 2;
 		int nameLen = this.client.textRenderer.getWidth(Common.hudData.name);
 
