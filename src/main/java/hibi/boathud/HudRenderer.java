@@ -49,6 +49,9 @@ extends DrawableHelper {
 		// but gives the impression that it's being updated faster than 20 hz (which it isn't)
 		this.displayedSpeed = MathHelper.lerp(tickDelta, this.displayedSpeed, Common.hudData.speed);
 
+		int colSpeed = this.getSpeedTextColor();
+		int colDrift = this.getDriftTextColor();
+
 		if(Config.extended) {
 			// Overlay texture and bar
 			this.drawTexture(stack, i - 91, this.scaledHeight - 83, 0, 70, 182, 33);
@@ -66,9 +69,9 @@ extends DrawableHelper {
 			
 			// Text
 			// First Row
-			this.typeCentered(stack, String.format(Config.speedFormat, this.displayedSpeed * Config.speedRate), i - 58, this.scaledHeight - 76, 0xFFFFFF);
-			this.typeCentered(stack, String.format(Config.angleFormat, Common.hudData.driftAngle), i, this.scaledHeight - 76, 0xFFFFFF);
-			this.typeCentered(stack, String.format(Config.gFormat, Common.hudData.g), i + 58, this.scaledHeight - 76, 0xFFFFFF);
+			this.typeCentered(stack, String.format(Config.speedFormat, this.displayedSpeed * Config.speedRate), i - 58, this.scaledHeight - 76, colSpeed);
+			this.typeCentered(stack, String.format(Config.angleFormat, Common.hudData.driftAngle), i, this.scaledHeight - 76, colDrift);
+			this.typeCentered(stack, String.format(Config.gFormat, Common.hudData.g), i + 58, this.scaledHeight - 76, colSpeed);
 			// Second Row
 			this.client.textRenderer.drawWithShadow(stack, Common.hudData.name, i + 88 - nameLen, this.scaledHeight - 65, 0xFFFFFF);
 
@@ -79,36 +82,59 @@ extends DrawableHelper {
 
 			// Sprites
 			// Left-right
-			this.drawTexture(stack, i - 32, this.scaledHeight - 55, 61, this.client.options.leftKey.isPressed() ? 38 : 30, 17, 8);
-			this.drawTexture(stack, i + 18, this.scaledHeight - 55, 79, this.client.options.rightKey.isPressed() ? 38 : 30, 17, 8);
+			this.drawTexture(stack, i - 23, this.scaledHeight - 54, 96, this.client.options.leftKey.isPressed() ? 38 : 30, 8, 8);
+			this.drawTexture(stack, i + 18, this.scaledHeight - 54, 104, this.client.options.rightKey.isPressed() ? 38 : 30, 8, 8);
 			// Brake-throttle bar
 			this.drawTexture(stack, i, this.scaledHeight - 45, 0, this.client.options.forwardKey.isPressed() ? 45 : 40, 61, 5);
 			this.drawTexture(stack, i - 61, this.scaledHeight - 45, 0, this.client.options.backKey.isPressed() ? 35 : 30, 61, 5);
-			// Gain Arrow by Pigalala
-			this.drawTexture(stack, i + 80, this.scaledHeight - 55, 203, this.getOvrSpeed(), 7, 9);
+			// Gain arrow
+			this.drawTexture(stack, i + 80, this.scaledHeight - 54, 203, this.getGainArrowUV(), 7, 8);
 
 			// Speed and drift angle
-			this.typeCentered(stack, String.format(Config.gFormat, Common.hudData.g), i + 60, this.scaledHeight - 54, 0xFFFFFF);
-			this.typeCentered(stack, String.format(Config.speedFormat, this.displayedSpeed * Config.speedRate), i - 62, this.scaledHeight - 54, 0xFFFFFF);
-			this.typeCentered(stack, String.format(Config.angleFormat, Common.hudData.driftAngle), i + 2, this.scaledHeight - 54, 0xFFFFFF);
-
-
+			this.typeCentered(stack, String.format(Config.gFormat, Common.hudData.g), i + 60, this.scaledHeight - 54, colSpeed);
+			this.typeCentered(stack, String.format(Config.speedFormat, this.displayedSpeed * Config.speedRate), i - 62, this.scaledHeight - 54, colSpeed);
+			this.typeCentered(stack, String.format(Config.angleFormat, Common.hudData.driftAngle), i + 2, this.scaledHeight - 54, colDrift);
 		}
 		RenderSystem.disableBlend();
 	}
 	
-	// Made by Pigalala
-	private Integer getOvrSpeed() {
+	private Integer getGainArrowUV() {
+		if (Math.abs(Common.hudData.g) < 0.05) {
+			return 16; // -
+		}
 		if (Common.hudData.g > 0.0) {
-			return 0;
+			return 0; // up arrow
 		}
 		if (Common.hudData.g < 0.0) {
-			return 9;
+			return 8; // down arrow
 		}
-		return 18;
+		return 16; // -
 	}
 
-	/** Renders the speed bar atop the HUD, uses displayedSpeed to, well, diisplay the speed. */
+	private Integer getSpeedTextColor() {
+		if (Math.abs(Common.hudData.g) < 0.05) {
+			return 0xFFFFFF; // white
+		}
+		if (Common.hudData.g > 0.0) {
+			return 0x63C74D; // green
+		}
+		if (Common.hudData.g < 0.0) {
+			return 0xFF0044; // red
+		}
+		return 0xFFFFFF; // white
+	}
+
+	private Integer getDriftTextColor() {
+		if (Common.hudData.driftAngle < 22.5) {
+			return 0xFFFFFF; // white
+		} else if (Common.hudData.driftAngle < 45) {
+			return 0xFEE761; // yellow
+		} else {
+			return 0xFF0044; // red
+		}
+	}
+
+	/** Renders the speed bar atop the HUD, uses displayedSpeed to, well, display the speed. */
 	private void renderBar(MatrixStack stack, int x, int y) {
 		this.drawTexture(stack, x, y, 0, BAR_OFF[Config.barType], 182, 5);
 		if(Common.hudData.speed < MIN_V[Config.barType]) return;
