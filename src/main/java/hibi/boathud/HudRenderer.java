@@ -109,6 +109,7 @@ extends DrawableHelper {
 		RenderSystem.disableBlend();
 	}
 	
+	/** Returns the vertical UV offset for the gain arrow sprite. */
 	private Integer getGainArrowUV() {
 		if (Math.abs(Common.hudData.g) < 0.05) {
 			return 16; // -
@@ -122,6 +123,7 @@ extends DrawableHelper {
 		return 16; // -
 	}
 
+	/** Returns a text color for the given acceleration. */
 	private Integer getSpeedTextColor() {
 		if (Math.abs(Common.hudData.g) < 0.05) {
 			return 0xFFFFFF; // white
@@ -135,6 +137,7 @@ extends DrawableHelper {
 		return 0xFFFFFF; // white
 	}
 
+	/** Returns a text color for the given drift angle. */
 	private Integer getDriftTextColor() {
 		if (Common.hudData.driftAngle < 22.5) {
 			return 0xFFFFFF; // white

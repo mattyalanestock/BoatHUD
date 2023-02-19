@@ -19,5 +19,6 @@
 	"boathud.tooltip.bar_type": "Change the display and behavior of the speed bar:",
 	"boathud.tooltip.bar_type.packed": "Water & Packed: Best for low speeds.",
 	"boathud.tooltip.bar_type.mixed": "Mixed: Best for running on any kind of ice.",
-	"boathud.tooltip.bar_type.blue": "Blue: Suitable mostly for blue ice racing."
+	"boathud.tooltip.bar_type.blue": "Blue: Suitable mostly for blue ice racing.",
+	"mount.onboard":""
 }

@@ -68,7 +68,7 @@ public class Config {
 		catch (Exception e) {
 		}
 		// Sanity check
-		if(barType > 2 || barType < 0) {
+		if(barType < 0 || barType > 2) {
 			barType = 0;
 		}
 	}

@@ -31,7 +31,7 @@ public class MenuInteg implements ModMenuApi {
 					.build())
 
 				.addEntry(entryBuilder.startBooleanToggle(EXTENDED, Config.extended)
-					.setDefaultValue(true)
+					.setDefaultValue(false)
 					.setTooltip(TIP_EXTENDED)
 					.setSaveConsumer(newVal -> Config.extended = newVal)
 					.build())
