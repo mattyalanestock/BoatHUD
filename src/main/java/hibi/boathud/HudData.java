@@ -11,6 +11,8 @@ public class HudData {
 	public double g;
 	/** The current drift angle in degrees, the angle difference between the velocity and where the boat is facing. */
 	public double driftAngle;
+	/** The signed integer value of the drift angle. */
+	public int driftDir;
 
 	/** The curerent ping of the player, just for bookkeeping. */
 	public int ping;
@@ -36,6 +38,7 @@ public class HudData {
 		// a̅•b̅ = |a̅||b̅|cos ϑ
 		// ϑ = acos [(a̅•b̅) / (|a̅||b̅|)]
 		this.driftAngle = Math.toDegrees(Math.acos(velocity.dotProduct(boat.getRotationVector()) / velocity.length() * boat.getRotationVector().length()));
+		this.driftDir = (int)(Math.signum(velocity.crossProduct(boat.getRotationVector()).getY()) * this.driftAngle);
 		if(Double.isNaN(this.driftAngle)) this.driftAngle = 0; // Div by 0
 
 		// Trivial miscellanea

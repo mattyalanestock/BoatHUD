@@ -55,6 +55,8 @@ extends DrawableHelper {
 
 		int colSpeed = this.getSpeedTextColor();
 		int colDrift = this.getDriftTextColor();
+		int angleInt = Math.max(-90, Math.min(90, Common.hudData.driftDir));
+		int angleSpr = this.getDriftAngleUV();
 
 		if(Config.extended) {
 			// Overlay texture and bar
@@ -85,6 +87,11 @@ extends DrawableHelper {
 			this.renderBar(stack, i - 91, this.scaledHeight - 61);
 
 			// Sprites
+			// Angle indicator
+			if (Common.hudData.driftAngle<180) {
+				this.drawTexture(stack, i + angleInt - 4, this.scaledHeight - 66, 112+angleSpr, 30, 8, 8);
+			}
+			
 			// Left-right
 			this.drawTexture(stack, i - 23, this.scaledHeight - 54, 96, this.client.options.leftKey.isPressed() ? 38 : 30, 8, 8);
 			this.drawTexture(stack, i + 18, this.scaledHeight - 54, 104, this.client.options.rightKey.isPressed() ? 38 : 30, 8, 8);
@@ -135,6 +142,17 @@ extends DrawableHelper {
 			return 0xFEE761; // yellow
 		} else {
 			return 0xFF0044; // red
+		}
+	}
+
+	/** Returns the horizontal UV offset for the drift angle sprite. */
+	private Integer getDriftAngleUV() {
+		if (Common.hudData.driftAngle < 22.5) {
+			return 0; // white
+		} else if (Common.hudData.driftAngle < 45) {
+			return 8; // yellow
+		} else {
+			return 16; // red
 		}
 	}
 
