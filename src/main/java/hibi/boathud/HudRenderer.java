@@ -57,40 +57,41 @@ extends DrawableHelper {
 		int angleInt = Math.max(-90, Math.min(90, Common.hudData.driftDir));
 		int angleSpr = this.getDriftAngleUV();
 
-			// Overlay texture and bar
-			this.drawTexture(stack, i - 91, this.scaledHeight - 61, 0, 50, 182, 20);
-			this.renderBar(stack, i - 91, this.scaledHeight - 61);
+		// Overlay texture and bar
+		this.drawTexture(stack, i - 91, this.scaledHeight - 61, 0, 50, 182, 20);
+		this.renderBar(stack, i - 91, this.scaledHeight - 61);
 
-			// Sprites
-			// Angle indicator
-			if (Math.ceil(Common.hudData.driftAngle)<180) {
-				this.drawTexture(stack, i + angleInt - 4, this.scaledHeight - 66, 112+angleSpr, 30, 8, 8);
+		// Sprites
+		// Angle indicator
+		if (Math.ceil(Common.hudData.driftAngle)<180) {
+			this.drawTexture(stack, i + angleInt - 4, this.scaledHeight - 66, 112+angleSpr, 30, 8, 8);
+		}
+		// Left-right
+		this.drawTexture(stack, i - 23, this.scaledHeight - 54, 96, this.client.options.leftKey.isPressed() ? 38 : 30, 8, 8);
+		this.drawTexture(stack, i + 18, this.scaledHeight - 54, 104, this.client.options.rightKey.isPressed() ? 38 : 30, 8, 8);
+		// Ping
+		this.renderPing(stack, i + 30, this.scaledHeight - 54);
+		// Brake-throttle bar
+		this.drawTexture(stack, i, this.scaledHeight - 45, 0, this.client.options.forwardKey.isPressed() ? 45 : 40, 61, 5);
+		this.drawTexture(stack, i - 61, this.scaledHeight - 45, 0, this.client.options.backKey.isPressed() ? 35 : 30, 61, 5);
+		// Gain arrow
+		this.drawTexture(stack, i + 80, this.scaledHeight - 54, 203, this.getGainArrowUV(), 7, 8);
+
+		// Text
+		// Player Name
+		if(Config.playername) {
+			int namePos = this.scaledHeight - 76;
+			if(Config.centered) {
+				namePos = this.scaledHeight - 38;
 			}
-			// Left-right
-			this.drawTexture(stack, i - 23, this.scaledHeight - 54, 96, this.client.options.leftKey.isPressed() ? 38 : 30, 8, 8);
-			this.drawTexture(stack, i + 18, this.scaledHeight - 54, 104, this.client.options.rightKey.isPressed() ? 38 : 30, 8, 8);
-			// Ping
-			this.renderPing(stack, i + 30, this.scaledHeight - 54);
-			// Brake-throttle bar
-			this.drawTexture(stack, i, this.scaledHeight - 45, 0, this.client.options.forwardKey.isPressed() ? 45 : 40, 61, 5);
-			this.drawTexture(stack, i - 61, this.scaledHeight - 45, 0, this.client.options.backKey.isPressed() ? 35 : 30, 61, 5);
-			// Gain arrow
-			this.drawTexture(stack, i + 80, this.scaledHeight - 54, 203, this.getGainArrowUV(), 7, 8);
+			this.typeCentered(stack, Common.hudData.name, i, namePos, 0xFFFFFF);
+		}
 
-			// Text
-			// Player Name
-			if(Config.playername) {
-				int namePos = this.scaledHeight - 76;
-				if(Config.centered) {
-					namePos = this.scaledHeight - 38;
-				}
-				this.typeCentered(stack, Common.hudData.name, i, namePos, 0xFFFFFF);
-			}
+		// Speed and drift angle
+		this.typeCentered(stack, String.format(Config.gFormat, Common.hudData.g), i + 60, this.scaledHeight - 54, colSpeed);
+		this.typeCentered(stack, String.format(Config.speedFormat, this.displayedSpeed * Config.speedRate), i - 62, this.scaledHeight - 54, colSpeed);
+		this.typeCentered(stack, String.format(Config.angleFormat, Common.hudData.driftAngle), i + 2, this.scaledHeight - 54, colDrift);
 
-			// Speed and drift angle
-			this.typeCentered(stack, String.format(Config.gFormat, Common.hudData.g), i + 60, this.scaledHeight - 54, colSpeed);
-			this.typeCentered(stack, String.format(Config.speedFormat, this.displayedSpeed * Config.speedRate), i - 62, this.scaledHeight - 54, colSpeed);
-			this.typeCentered(stack, String.format(Config.angleFormat, Common.hudData.driftAngle), i + 2, this.scaledHeight - 54, colDrift);
 		RenderSystem.disableBlend();
 	}
 	
