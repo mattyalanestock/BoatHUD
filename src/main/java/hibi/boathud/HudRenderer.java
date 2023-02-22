@@ -63,7 +63,7 @@ extends DrawableHelper {
 
 			// Sprites
 			// Angle indicator
-			if (Common.hudData.driftAngle<180) {
+			if (Math.ceil(Common.hudData.driftAngle)<180) {
 				this.drawTexture(stack, i + angleInt - 4, this.scaledHeight - 66, 112+angleSpr, 30, 8, 8);
 			}
 			// Left-right
