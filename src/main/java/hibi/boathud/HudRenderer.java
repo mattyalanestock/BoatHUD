@@ -41,7 +41,10 @@ extends DrawableHelper {
 			this.scaledHeight = this.client.getWindow().getScaledHeight();
 		}
 		int i = this.scaledWidth / 2;
-		int nameLen = this.client.textRenderer.getWidth(Common.hudData.name);
+		int namePos = this.scaledHeight - 76;
+		if(Config.centered) {
+			namePos = this.scaledHeight - 38;
+		}
 
 		// Render boilerplate
 		RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -95,11 +98,17 @@ extends DrawableHelper {
 			// Left-right
 			this.drawTexture(stack, i - 23, this.scaledHeight - 54, 96, this.client.options.leftKey.isPressed() ? 38 : 30, 8, 8);
 			this.drawTexture(stack, i + 18, this.scaledHeight - 54, 104, this.client.options.rightKey.isPressed() ? 38 : 30, 8, 8);
+			// Ping
+			this.renderPing(stack, i + 30, this.scaledHeight - 54);
 			// Brake-throttle bar
 			this.drawTexture(stack, i, this.scaledHeight - 45, 0, this.client.options.forwardKey.isPressed() ? 45 : 40, 61, 5);
 			this.drawTexture(stack, i - 61, this.scaledHeight - 45, 0, this.client.options.backKey.isPressed() ? 35 : 30, 61, 5);
 			// Gain arrow
 			this.drawTexture(stack, i + 80, this.scaledHeight - 54, 203, this.getGainArrowUV(), 7, 8);
+
+			// Text
+			// Player Name
+			this.typeCentered(stack, Common.hudData.name, i, namePos, 0xFFFFFF);
 
 			// Speed and drift angle
 			this.typeCentered(stack, String.format(Config.gFormat, Common.hudData.g), i + 60, this.scaledHeight - 54, colSpeed);
