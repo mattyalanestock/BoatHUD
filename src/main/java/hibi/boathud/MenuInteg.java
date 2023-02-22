@@ -30,10 +30,10 @@ public class MenuInteg implements ModMenuApi {
 					.setSaveConsumer(newVal -> Config.centered = newVal)
 					.build())
 
-				.addEntry(entryBuilder.startBooleanToggle(EXTENDED, Config.extended)
+				.addEntry(entryBuilder.startBooleanToggle(PLAYERNAME, Config.playername)
 					.setDefaultValue(false)
-					.setTooltip(TIP_EXTENDED)
-					.setSaveConsumer(newVal -> Config.extended = newVal)
+					.setTooltip(TIP_PLAYERNAME)
+					.setSaveConsumer(newVal -> Config.playername = newVal)
 					.build())
 
 				.addEntry(entryBuilder.startEnumSelector(SPEED_FORMAT, SpeedFormat.class, SpeedFormat.values()[Config.configSpeedType])
@@ -66,11 +66,11 @@ public class MenuInteg implements ModMenuApi {
 		CAT = Text.translatable("boathud.config.cat"),
 		ENABLED = Text.translatable("boathud.option.enabled"),
 		CENTERED = Text.translatable("boathud.option.centered"),
-		EXTENDED = Text.translatable("boathud.option.extended"),
+		PLAYERNAME = Text.translatable("boathud.option.playername"),
 		BAR_TYPE = Text.translatable("boathud.option.bar_type"),
 		SPEED_FORMAT = Text.translatable("boathud.option.speed_format"),
-		TIP_EXTENDED = Text.translatable("boathud.tooltip.extended"),
 		TIP_CENTERED = Text.translatable("boathud.tooltip.centered"),
+		TIP_PLAYERNAME = Text.translatable("boathud.tooltip.playername"),
 		TIP_BAR = Text.translatable("boathud.tooltip.bar_type"),
 		TIP_BAR_PACKED = Text.translatable("boathud.tooltip.bar_type.packed"),
 		TIP_BAR_MIXED = Text.translatable("boathud.tooltip.bar_type.mixed"),

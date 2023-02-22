@@ -41,10 +41,6 @@ extends DrawableHelper {
 			this.scaledHeight = this.client.getWindow().getScaledHeight();
 		}
 		int i = this.scaledWidth / 2;
-		int namePos = this.scaledHeight - 76;
-		if(Config.centered) {
-			namePos = this.scaledHeight - 38;
-		}
 
 		// Render boilerplate
 		RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -83,7 +79,13 @@ extends DrawableHelper {
 
 			// Text
 			// Player Name
-			this.typeCentered(stack, Common.hudData.name, i, namePos, 0xFFFFFF);
+			if(Config.playername) {
+				int namePos = this.scaledHeight - 76;
+				if(Config.centered) {
+					namePos = this.scaledHeight - 38;
+				}
+				this.typeCentered(stack, Common.hudData.name, i, namePos, 0xFFFFFF);
+			}
 
 			// Speed and drift angle
 			this.typeCentered(stack, String.format(Config.gFormat, Common.hudData.g), i + 60, this.scaledHeight - 54, colSpeed);
