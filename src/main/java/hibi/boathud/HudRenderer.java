@@ -61,30 +61,6 @@ extends DrawableHelper {
 		int angleInt = Math.max(-90, Math.min(90, Common.hudData.driftDir));
 		int angleSpr = this.getDriftAngleUV();
 
-		if(Config.extended) {
-			// Overlay texture and bar
-			this.drawTexture(stack, i - 91, this.scaledHeight - 83, 0, 70, 182, 33);
-			this.renderBar(stack, i - 91, this.scaledHeight - 83);
-
-			// Sprites
-			// Left-right
-			this.drawTexture(stack, i - 86, this.scaledHeight - 65, 61, this.client.options.leftKey.isPressed() ? 38 : 30, 17, 8);
-			this.drawTexture(stack, i - 63, this.scaledHeight - 65, 79, this.client.options.rightKey.isPressed() ? 38 : 30, 17, 8);
-			// Ping
-			this.renderPing(stack, i + 75 - nameLen, this.scaledHeight - 65);
-			// Brake-throttle bar
-			this.drawTexture(stack, i, this.scaledHeight - 55, 0, this.client.options.forwardKey.isPressed() ? 45 : 40, 61, 5);
-			this.drawTexture(stack, i - 61, this.scaledHeight - 55, 0, this.client.options.backKey.isPressed() ? 35 : 30, 61, 5);
-			
-			// Text
-			// First Row
-			this.typeCentered(stack, String.format(Config.speedFormat, this.displayedSpeed * Config.speedRate), i - 58, this.scaledHeight - 76, colSpeed);
-			this.typeCentered(stack, String.format(Config.angleFormat, Common.hudData.driftAngle), i, this.scaledHeight - 76, colDrift);
-			this.typeCentered(stack, String.format(Config.gFormat, Common.hudData.g), i + 58, this.scaledHeight - 76, colSpeed);
-			// Second Row
-			this.client.textRenderer.drawWithShadow(stack, Common.hudData.name, i + 88 - nameLen, this.scaledHeight - 65, 0xFFFFFF);
-
-		} else { // Compact mode
 			// Overlay texture and bar
 			this.drawTexture(stack, i - 91, this.scaledHeight - 61, 0, 50, 182, 20);
 			this.renderBar(stack, i - 91, this.scaledHeight - 61);
@@ -94,7 +70,6 @@ extends DrawableHelper {
 			if (Common.hudData.driftAngle<180) {
 				this.drawTexture(stack, i + angleInt - 4, this.scaledHeight - 66, 112+angleSpr, 30, 8, 8);
 			}
-			
 			// Left-right
 			this.drawTexture(stack, i - 23, this.scaledHeight - 54, 96, this.client.options.leftKey.isPressed() ? 38 : 30, 8, 8);
 			this.drawTexture(stack, i + 18, this.scaledHeight - 54, 104, this.client.options.rightKey.isPressed() ? 38 : 30, 8, 8);
@@ -114,7 +89,6 @@ extends DrawableHelper {
 			this.typeCentered(stack, String.format(Config.gFormat, Common.hudData.g), i + 60, this.scaledHeight - 54, colSpeed);
 			this.typeCentered(stack, String.format(Config.speedFormat, this.displayedSpeed * Config.speedRate), i - 62, this.scaledHeight - 54, colSpeed);
 			this.typeCentered(stack, String.format(Config.angleFormat, Common.hudData.driftAngle), i + 2, this.scaledHeight - 54, colDrift);
-		}
 		RenderSystem.disableBlend();
 	}
 	
