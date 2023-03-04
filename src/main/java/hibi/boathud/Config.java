@@ -21,7 +21,7 @@ public class Config {
 	/** Controls whether or not the HUD should be displayed. */
 	public static boolean enabled = true;
 	/** Controls whether or not to show player's name on the HUD. */
-	public static boolean playername = true;
+	public static boolean playername = false;
 	/** Controls whether or not to vertically center the HUD. */
 	public static boolean centered = true;
 
