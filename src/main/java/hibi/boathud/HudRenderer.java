@@ -18,9 +18,9 @@ extends DrawableHelper {
 
 	// The index to be used in these scales is the bar type (stored internally as an integer, defined in Config)
 	//                                       Pack  Mix Blue
-	private static final double[] MIN_V =   {  0d, 10d, 40d}; // Minimum display speed (m/s)
-	private static final double[] MAX_V =   { 40d, 70d, 70d}; // Maximum display speed (m/s)
-	private static final double[] SCALE_V = {4.5d,  3d,  6d}; // Pixels for 1 unit of speed (px*s/m) (BarWidth / (VMax - VMin))
+	private static final double[] MIN_V =   {    0d,     0d,     0d}; // Minimum display speed (m/s) (0, 10, 40)
+	private static final double[] MAX_V =   { 39.5d,  69.5d,  69.5d}; // Maximum display speed (m/s) (40, 70, 70)
+	private static final double[] SCALE_V = {  4.6d,  3.06d,  3.06d}; // Pixels for 1 unit of speed (px*s/m) (BarWidth / (VMax - VMin))
 	// V coordinates for each bar type in the texture file
 	//                                    Pk Mix Blu
 	private static final int[] BAR_OFF = { 0, 10, 20};
@@ -149,12 +149,14 @@ extends DrawableHelper {
 	private void renderBar(MatrixStack stack, int x, int y) {
 		this.drawTexture(stack, x, y, 0, BAR_OFF[Config.barType], 182, 5);
 		if(Common.hudData.speed < MIN_V[Config.barType]) return;
-		if(Common.hudData.speed > MAX_V[Config.barType]) {
-			if(this.client.world.getTime() % 2 == 0) return;
-			this.drawTexture(stack, x, y, 0, BAR_ON[Config.barType], 182, 5);
+		if(Common.hudData.speed >= MAX_V[Config.barType]) {
+			this.drawTexture(stack, x, y, 0, BAR_OFF[2], 182, 5);
+			if(this.client.world.getTime() % 4 < 2) return; // this will strobe if you hit max speed. maybe draw the 'full' bar instead of my colored gradient.
+			//this.drawTexture(stack, x, y, 0, BAR_ON[Config.barType], 182, 5);
+			this.drawTexture(stack, x, y, 0, BAR_ON[2], 182, 5);
 			return;
 		}
-		this.drawTexture(stack, x, y, 0, BAR_ON[Config.barType], (int)((this.displayedSpeed - MIN_V[Config.barType]) * SCALE_V[Config.barType]), 5);
+		this.drawTexture(stack, x, y, 0, BAR_ON[Config.barType], (int)Math.floor((this.displayedSpeed - MIN_V[Config.barType]) * SCALE_V[Config.barType]), 5);
 	}
 
 	/** Implementation is cloned from the notchian ping display in the tab player list.	 */
