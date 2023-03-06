@@ -3,14 +3,16 @@
     "id": "boathud",
     "version": "${version}",
 
-    "name": "BoatHUD Racer",
+    "name": "BoatHUD",
     "description": "This mod adds a configurable racing-style boat HUD, designed for racing boats on ice.",
     "authors": [
         "MattyAlanEstock",
-        "hibi",
-        "Makkuusen",
+        "hibi"
+    ],
+    "contributors": [
+        "pycatmc",
         "Pigalala",
-        "pycatmc"
+        "Makkuusen"
     ],
     "contact": {
         "sources": "https://github.com/mattyalanestock/BoatHud",
