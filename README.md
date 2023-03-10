@@ -1,9 +1,9 @@
-# Boat Hud
+# BoatHUD
 
 A Fabric mod that adds a HUD specifically for boating.
 Licensed under Unlicense.
 
-![BoatHud screenshot in an iceboat racetrack](.github/screenshot1.png)
+![BoatHUD screenshot indicating speed, drift angle, and acceleration.](.github/screenshot1.jpg)
 
 This HUD displays some information useful for boating such as drift angle and speed.
 
