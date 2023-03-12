@@ -15,8 +15,8 @@
         "Makkuusen"
     ],
     "contact": {
-        "sources": "https://github.com/mattyalanestock/BoatHud",
-        "issues": "https://github.com/mattyalanestock/BoatHud/issues"
+        "sources": "https://github.com/mattyalanestock/BoatHUD",
+        "issues": "https://github.com/mattyalanestock/BoatHUD/issues"
     },
 
     "license": "Unlicense",
@@ -44,6 +44,7 @@
     "custom": {
         "modmenu": {
             "links": {
+                "modmenu.github_releases": "https://github.com/mattyalanestock/BoatHUD/releases",
                 "modmenu.website": "https://www.mattyalanestock.com"
             }
         }
